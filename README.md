@@ -2,6 +2,14 @@
 
 Reverse Beacon Network Spy Box
 
+# Installing the Software
+
+Start by installing the Arduino IDE. This can be found at:
+
+https://www.arduino.cc/en/Main/Software
+
+For the purpose of this build the Windows version Arduino 1.8.8 was used.
+
 ## SDCard
 
 The SDCard holds the ring tones that can be associated with the Friends. The files total about 13 MB and must be stored on a FAT32 formatted SDCard. 
