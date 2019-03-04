@@ -8,7 +8,17 @@ Start by installing the Arduino IDE. This can be found at:
 
 https://www.arduino.cc/en/Main/Software
 
-For the purpose of this build the Windows version Arduino 1.8.8 was used.
+For the purpose of this build the Windows version Arduino 1.8.8 was used. 
+All default installation options were accepted.
+
+Next install the ESP32 board manager.
+
+- Open the Arduino IDE and navigate to File > Preferences.
+- Enter "https://dl.espressif.com/dl/package_esp32_index.json" into the box labelled
+"Additional Boards manager URLs:" then click the "OK" button.
+- Open the boards manager, navigate to Tools > Board > Boards Manager...
+- Search for ESP32 by typing "ESP32" into the top text box.
+- Cursor ove rthe "esp32" entry and click the "Install" button. This displayed version 1.0.1.
 
 ## SDCard
 
