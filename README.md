@@ -18,7 +18,8 @@ Next install the ESP32 board manager.
 "Additional Boards manager URLs:" then click the "OK" button.
 - Open the boards manager, navigate to Tools > Board > Boards Manager...
 - Search for ESP32 by typing "ESP32" into the top text box.
-- Cursor ove rthe "esp32" entry and click the "Install" button. This displayed version 1.0.1.
+- Cursor over the "esp32" entry and click the "Install" button. This displayed as version 1.0.1.
+- Once complete hit the "Close" button to close the dialog.
 
 ## SDCard
 
