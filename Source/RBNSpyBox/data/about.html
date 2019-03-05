@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>[RBNSpyBox]</title>
+        <link rel="stylesheet" type="text/css" href="styles.css" media="all" />
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="support.js"></script>
+
+        <script type="text/javascript">
+
+            // At this point the page is running
+
+            $(document).ready(function () {
+
+				// Update the details
+
+                updateNameVersion();
+            });
+
+        </script>
+    </head>
+    <body>
+        <div class='norm'>
+
+            <h1>
+                <span id="programName">[programName]</span>&nbsp;<span id="programVersion">[programVersion]</span>
+            </h1>
+
+            <button id="homeButton" onclick="window.location.href='index.html';">Home</button>
+            <button id="friendsButton" onclick="window.location.href='friends.html';">Friends</button>
+            <button id="settingsButton" onclick="window.location.href='settings.html';">Settings</button>
+            <button id="backupRestoreButton" onclick="window.location.href='backupRestore.html';">Backup/Restore</button>
+            <button id="helpButton" onclick="window.location.href='help.html';">Help</button>
+            <button id="aboutButton" onclick="window.location.href='about.html';">About</button>
+            <br />
+            <br />
+
+            <!-- About Div -->
+
+            <div id="aboutDiv">
+
+                <hr />
+
+                <h1>License Agreement</h1>
+
+                <p style="max-width:700px;">
+                    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+                    INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+                    PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+                    FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+                    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+                </p>
+
+                <p style="margin-left: 20px;">
+                    M.D. Waller G0PJO
+                    <br />
+                    Olive Cottage,
+                    <br />
+                    6, Church Road,
+                    <br />
+                    Chelmondiston,
+                    <br />
+                    Ipswich,
+                    <br />
+                    Suffolk,
+                    <br />
+                    IP9 1HS
+                    <br />
+                    United Kingdom
+                    <br />
+                    <br />
+                    Tel: (+44) [0]1473 780561
+                    <br />
+                    <br>
+                    Email: Martin@The-Wallers.net
+                    <br />
+                    <br>
+                    WWW: <a href='http://G0PJO.The-Wallers.net'>http://G0PJO.The-Wallers.net</a>
+                    <br />
+                    <br />
+                    &copy; M.D.Waller G0PJO
+                </p>
+				<hr/>
+				                	<form method="get" action="/doReboot">
+										To reboot click <button style="background-color: red; color: white;"
+                        	onclick="return confirm('Are you sure?')" type="submit">here</button>
+					</form>
+            </div>
+        </div>
+        <div id=footer>&copy; <span id="programCopyright"></span></div>
+    </body>
+</html>

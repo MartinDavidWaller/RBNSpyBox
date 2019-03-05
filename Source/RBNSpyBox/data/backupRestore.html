@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+    	<title>[RBNSpyBox]</title>
+    	<link rel="stylesheet" type="text/css" href="styles.css" media="all" />
+
+    	<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    	<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    	<script type="text/javascript" src="support.js"></script>
+
+    	<script type="text/javascript">
+
+		// https://stackoverflow.com/questions/133310/how-can-i-get-jquery-to-perform-a-synchronous-rather-than-asynchronous-ajax-re
+
+	    // At this point the page is running
+
+            $(document).ready(function () {
+
+               	updateNameVersion();
+
+       	    });
+
+       	    function allowDrop(ev) {
+			  ev.preventDefault();
+			}
+
+						    async function foo(x) {
+							  var res = await fetch(x)
+							  console.log(res.ok)
+
+}
+
+			function processFile(file) {
+
+				// Build a FileReader object to read and process the file
+
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+
+					// At this point we have the file loaded so we can turn it into
+					// an XML object
+
+					var parser = new DOMParser();
+    				var xmlDoc = parser.parseFromString(e.target.result, "application/xml");
+
+					// Try and locate the RBNSpyBox element
+
+    				var rbnSpyBoxElements = xmlDoc.getElementsByTagName("RBNSpyBox");
+    				if (1 != rbnSpyBoxElements.length) {
+
+    					// This is not one of our files!
+
+    					$('#progress').html(file.name + " is not recognised as valid backup!");
+    				}
+    				else {
+
+    					// Pull out the Major and Minor version numbers
+
+    					var major = rbnSpyBoxElements[0].getAttribute('Major');
+    					var minor = rbnSpyBoxElements[0].getAttribute('Minor');
+
+						// Start off the backup
+
+						foo("/doRestoreFriendsBegin");
+
+    					// Loop through all the friends
+
+    					var friends = xmlDoc.getElementsByTagName("Friend");
+    					for (i = 0; i < friends.length; i++) {
+
+							// Pull out the friend data
+
+							var callsign = friends[i].getAttribute('Callsign');
+							var name = friends[i].getAttribute('Name');
+							var comment = friends[i].getAttribute('Comment');
+							var soundEnabled = friends[i].getAttribute('SoundEnabled');
+							var soundIndex = friends[i].getAttribute('SoundIndex');
+							var sound = friends[i].getAttribute('Sound');
+							var lastSeenAs = friends[i].getAttribute('LastSeenAs');
+							var lastSeen = friends[i].getAttribute('LastSeen');
+							var lastSeenSeconds = friends[i].getAttribute('LastSeenSeconds');
+							var lastSpeed = friends[i].getAttribute('LastSpeed');
+							var lastSpeedUnits = friends[i].getAttribute('LastSpeedUnits');
+							var lastFrequency = friends[i].getAttribute('LastFrequency');
+							var lastMode = friends[i].getAttribute('LastMode');
+
+							// Build the URL
+
+							var url = "doRestoreFriend?MemorySlot=" + i
+								+ "&Callsign=" + encodeURIComponent(callsign)
+								+ "&Name=" + encodeURIComponent(name)
+								+ "&Comment=" + encodeURIComponent(comment)
+								+ "&SoundEnabled=" + encodeURIComponent(soundEnabled)
+								+ "&SoundIndex=" + encodeURIComponent(soundIndex)
+								+ "&Sound=" + encodeURIComponent(sound)
+								+ "&LastSeenAs=" + encodeURIComponent(lastSeenAs)
+								+ "&LastSeen=" + encodeURIComponent(lastSeen)
+								+ "&LastSeenSeconds=" + encodeURIComponent(lastSeenSeconds)
+								+ "&LastSpeed=" + encodeURIComponent(lastSpeed)
+								+ "&LastSpeedUnits=" + encodeURIComponent(lastSpeedUnits)
+								+ "&LastFrequency=" + encodeURIComponent(lastFrequency)
+								+ "&LastMode=" + encodeURIComponent(lastMode);
+
+							//alert(url);
+
+							foo(url);
+    					}
+
+    					// Commit the restore
+
+    					foo("/doRestoreFriendsCommit");
+
+    				}
+				};
+
+				reader.readAsText(file);
+			}
+
+			function drop(ev) {
+
+				// Prevent default behavior (Prevent file from being opened)
+
+				ev.preventDefault();
+
+  				if (ev.dataTransfer.items) {
+
+    				// Use DataTransferItemList interface to access the file(s)
+
+    				for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+
+      					// If dropped items aren't files, reject them
+
+      					if (ev.dataTransfer.items[i].kind === 'file') {
+
+        					var file = ev.dataTransfer.items[i].getAsFile();
+
+        					console.log('... file[' + i + '].name = ' + file.name);
+        					processFile(file);
+      					}
+    				}
+  				} else {
+
+    				// Use DataTransfer interface to access the file(s)
+
+					for (var i = 0; i < ev.dataTransfer.files.length; i++) {
+
+      					console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
+						processFile(file);
+  					}
+				}
+			}
+
+
+    	</script>
+	</head>
+    <body>
+        <div class='norm'>
+
+       		<h1>
+            	<span id="programName">[programName]</span>&nbsp;<span id="programVersion">[programVersion]</span>
+            </h1>
+
+            <button id="homeButton" onclick="window.location.href='index.html';">Home</button>
+            <button id="friendsButton" onclick="window.location.href='friends.html';">Friends</button>
+            <button id="settingsButton" onclick="window.location.href='settings.html';">Settings</button>
+            <button id="backupRestoreButton" onclick="window.location.href='backupRestore.html';">Backup/Restore</button>
+            <button id="helpButton" onclick="window.location.href='help.html';">Help</button>
+            <button id="aboutButton" onclick="window.location.href='about.html';">About</button>
+           	<br />
+            <br />
+
+            <!-- Backup/Restore Div -->
+
+            <div id="backupRestoreDiv">
+
+                <hr />
+
+                <h1>Backup</h1>
+                <p>
+                	<form method="get" action="/getBackup">
+						To backup your friends click <button type="submit">here</button> and save the resulting
+						download safely.
+					</form>
+                </p>
+                <hr />
+                <h1>Restore</h1>
+                <p>
+                	To restore your friends drag and drop your data file below.
+                </p>
+                    <div style="
+                    	border-style: solid;
+                    	border-width:1px;
+                    	color: gray;
+                    	display: table-cell;
+                    	font-size: 20pt;
+                    	height: 100px;
+                    	text-align:center;
+                    	vertical-align: middle;
+                    	width: 400px;"
+                    	ondrop="drop(event)" ondragover="allowDrop(event)">
+                    	Here...
+                    </div>
+
+					<p>
+						<span id="progress"></span>
+					</p>
+                <div>
+        	</div>
+        <div id=footer>&copy; <span id="programCopyright"></span></div>
+    </body>
+</html>

@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+    	<title>[RBNSpyBox]</title>
+    	<link rel="stylesheet" type="text/css" href="styles.css" media="all" />
+
+    	<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    	<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    	<script type="text/javascript" src="support.js"></script>
+
+    	<script type="text/javascript">
+
+			/*
+			// This method is called to update the friend associated with the given
+			// memory slot. It will retrieve and validate all the data. If valid then
+			// it will be passed into the server. On return it will refresh the page.
+			*/
+			function doUpdate(memorySlot)
+			{
+				// Pull out all the necessary data
+
+				var callsign = $("#Callsign" + memorySlot).val();
+				var name = $("#Name" + memorySlot).val();
+				var comment = $("#Comment" + memorySlot).val();
+				var soundEnabled = $("#SoundEnabled" + memorySlot).prop('checked');
+				var selectedOption = $("#SoundSelected" + memorySlot + " option:selected");
+
+				// Next we can build the URL to do the update
+
+				var url = "doFriendUpdate?MemorySlot=" + memorySlot
+					+ "&Callsign=" + encodeURIComponent(callsign)
+					+ "&Name=" + encodeURIComponent(name)
+					+ "&Comment=" + encodeURIComponent(comment)
+					+ "&SoundEnabled=" + (true === soundEnabled ? "on" : "off")
+					+ "&SoundSelected=" + selectedOption.val();
+
+				$.ajax({
+					url: url
+				}).done(function (data) {
+
+					// Refresh the page
+
+					location.reload();
+				});
+			}
+
+			/*
+			// This method is called to add all necessary options to a
+			// select representing the available sounds. It is passed the
+			// select to be updates, the XML data object representing all
+			// available sounds and any sound to be selected.
+			*/
+			function buildSoundSelect(select,data,soundToSelect)
+			{
+				// Pull out all available sounds
+
+				var sounds = data.documentElement.getElementsByTagName("Sound");
+
+				// For al the sounds that we have
+
+			    for (var i = 0; i < sounds.length; i++) {
+
+			    	// Pull out the sound being processed
+
+			    	var sound = sounds[i];
+
+			    	// Build the option and append it to the select. Set
+			    	// the value and text accordingly
+
+			    	var o = $("<option />",
+			    		{
+			    			value: 	sound.getAttribute("Index"),
+			    			text: 	sound.getAttribute("Name")
+			    		}).appendTo(select);
+
+					// Select the option as required
+
+			    	if (sound.getAttribute("Name") === soundToSelect)
+			    	  o.prop('selected', true);
+			    }
+			}
+
+            function getFriendsForEdit()
+            {
+            	var soundData = null;
+
+            	$.ajax({
+			 		url: "getSounds",
+			 		async: false
+			    }).done(function (data) {
+
+					// Save the sound data
+
+			        soundData = data;
+                });
+
+				buildSoundSelect($("#addFriendSoundSelection"),soundData,"");
+
+				// Get the friends
+
+                $.ajax({
+                    url: "getFriendsForEdit"
+                }).done(function (data) {
+
+                    // We have the data, process it.
+
+                    $("#friendsDiv").empty();
+
+                    var friends = data.documentElement.getElementsByTagName("FriendForEdit");
+                    if (0 == friends.length) {
+                        var tempDiv = document.createElement("div");
+                        tempDiv.innerHTML = "No Friends!";
+                        $("#friendsDiv").append(tempDiv);
+                    }
+                    else {
+
+                        var tableBody = buildTable($("#friendsDiv"), ["Callsign", "Name", "Comment", "Sounds", "Update", "Remove"]);
+                        for (var i = 0; i < friends.length; i++) {
+                            var friend = friends[i];
+                            var tr = $("<tr/>").appendTo(tableBody);
+
+							var memorySlot = friend.getAttribute("MemorySlot");
+                            var callsign = friend.getAttribute("Callsign");
+                            $("<input/>").appendTo($("<td/>").appendTo(tr))
+                            	.val(callsign)
+                            	.attr("id","Callsign" + memorySlot)
+                            	.attr("placeholder","Callsign")
+                            	.attr("maxlength","20")
+                            	.attr("type","text");
+
+                            //   <input name='addFriendCallsign' type="text"  required>
+
+                            $("<input/>").appendTo($("<td/>").appendTo(tr))
+                            	.val(friend.getAttribute("Name"))
+                            	.attr("id","Name" + memorySlot)
+                            	.attr("placeholder","Name")
+                            	.attr("maxlength","20")
+                            	.attr("type","text");
+
+                            $("<input/>").appendTo($("<td/>").appendTo(tr))
+                            	.val(friend.getAttribute("Comment"))
+                            	.attr("id","Comment" + memorySlot)
+                                .attr("placeholder","Comment")
+                                .attr("maxlength","20")
+                            	.attr("type","text");;
+
+							// Add the sound inputs
+
+							var sound = friend.getAttribute("Sound");
+
+							td = $("<td/>").appendTo(tr);
+							var cb = $("<input/>",
+								{
+									type : "checkbox"
+								})
+								.appendTo(td)
+								.attr("id","SoundEnabled" + memorySlot);
+
+							cb.attr('checked',sound.length > 0);
+
+							var s = $("<select/>")
+								.appendTo(td)
+								.attr("id","SoundSelected" + memorySlot);
+
+							buildSoundSelect(s,soundData,sound);
+
+							// Next we need to Update button
+
+                            td = $("<td/>").appendTo(tr);
+                            $("<button/>",
+                                    {
+                                        text: "Update",
+                                        click: function () {
+
+											// Update the slot
+
+											doUpdate($(this).data("MemorySlot"));
+                                        }
+                                    }).appendTo(td)
+                                    .attr('Callsign', callsign)
+                                    .data("MemorySlot", memorySlot);
+
+                            // Finally we need the Remove button
+
+                            td = $("<td/>").appendTo(tr);
+                            $("<button/>",
+                                    {
+                                        text: "Remove",
+                                        click: function () {
+
+                                            var queryString =
+                                                    "?callsign=" + encodeURIComponent($(this).attr('Callsign'));
+
+                                            // Fianlly we can ask for it to be removed
+
+                                            $.ajax({
+                                                url: "doRemoveFriend" + queryString
+                                            }).done(function (data) {
+
+												// Reload the page!
+
+                                                location = location;
+                                            });
+                                        }
+                                    }).appendTo(td).attr('Callsign', callsign);
+                        }
+                    }
+                });
+            }
+
+			/*
+			// This method is called when the Listen button is clicked. Here
+			// we simply ask the server to play the sound.
+			*/
+			function doListen() {
+
+				// Play the sound
+
+        		$.ajax({
+		    		url: "doListen?sound=" + $("#addFriendSoundSelection").val()
+		    	}).done(function (data) { });
+			}
+
+        	// At this point the page is running
+
+        	$(document).ready(function () {
+
+            	updateNameVersion();
+
+				getFriendsForEdit();
+
+        	});
+    	</script>
+	</head>
+    <body>
+        <div class='norm'>
+
+            <h1>
+                <span id="programName">[programName]</span>&nbsp;<span id="programVersion">[programVersion]</span>
+            </h1>
+
+            <button id="homeButton" onclick="window.location.href='index.html';">Home</button>
+            <button id="friendsButton" onclick="window.location.href='friends.html';">Friends</button>
+            <button id="settingsButton" onclick="window.location.href='settings.html';">Settings</button>
+            <button id="backupRestoreButton" onclick="window.location.href='backupRestore.html';">Backup/Restore</button>
+            <button id="helpButton" onclick="window.location.href='help.html';">Help</button>
+            <button id="aboutButton" onclick="window.location.href='about.html';">About</button>
+            <br />
+            <br />
+
+            <!-- Main Div -->
+
+            <div id="mainDiv">
+
+                <hr />
+
+                <h1>Friends</h1>
+
+                <div id="friendsDiv"></div>
+
+                <hr />
+
+                <form action="doAddFriend" method="get">
+                    <h1>Add New Friend</h1>
+                    <table>
+                        <tr>
+                            <td>Callsign:</td>
+                            <td>
+                                <input name='addFriendCallsign' type="text" placeholder="Callsign" maxlength="20" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Name:</td>
+                            <td>
+                                <input name='addFriendName' type="text" placeholder="Name" maxlength="20" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Comment:</td>
+                            <td>
+                                <input name='addFriendComment' type="text" placeholder="Comment" maxlength="20">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sound:</td>
+                            <td>
+                            	<input type="checkbox" name="addFriendSoundEnabled" checked="checked">
+                                <select id="addFriendSoundSelection" name="addFriendSoundSelection">
+                                </select>
+								<button type="button" onclick="doListen();">Listen!</button>
+                            </td>
+                        </tr>
+                    </table>
+                    <p>
+                        <button type="submit">Add friend!</button>
+                    </p>
+                    <p>
+                        &nbsp;
+                    </p>
+                </form>
+
+                <hr />
+
+                <form action="doRemoveAllFriends" method="get">
+                    <h1>Delete All Friends</h1>
+
+                    <p>
+                        <button
+                        	style="background-color: red; color: white;"
+                        	onclick="return confirm('Are you sure?')"
+                        	type="submit">Delete All!</button>
+                    </p>
+                    <p>
+                        &nbsp;
+                    </p>
+                </form>
+            </div>
+        </div>
+        <div id=footer>&copy; <span id="programCopyright"></span></div>
+    </body>
+</html>

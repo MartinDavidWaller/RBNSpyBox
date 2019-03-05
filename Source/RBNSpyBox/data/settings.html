@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+    	<title>[RBNSpyBox]</title>
+    	<link rel="stylesheet" type="text/css" href="styles.css" media="all" />
+
+    	<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    	<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    	<script type="text/javascript" src="support.js"></script>
+
+    	<script type="text/javascript">
+
+			function updateForm() {
+
+    			// Get the form data
+
+    			$.ajax({
+        			url: "getSettingsData"
+    			}).done(function (data) {
+
+        			// We have the data, process it.
+
+        			var settingsData = data.documentElement;
+        			$("#hostnameInput").val(settingsData.getAttribute("Hostname"));
+        			$("#ssidInput").val(settingsData.getAttribute("WiFiSSID"));
+        			$("#passwordInput").val(settingsData.getAttribute("WiFiPassword"));
+        			$("#callsignInput").val(settingsData.getAttribute("Callsign"));
+        			$("#ledEnabledInput").attr('checked',"true" === settingsData.getAttribute("LEDEnabled"));
+        			$("#soundEnabledInput").attr('checked',"true" === settingsData.getAttribute("SoundEnabled"));
+        			$("#volumeInput").val(settingsData.getAttribute("Volume"));
+        			$("#friendCycleCountInput").val(settingsData.getAttribute("FriendCycleCount"));
+
+    			}).fail(function (jqXHR, textStatus) {
+
+        			alert("Contact with host lost!" + textStatus);
+    			});
+			}
+
+			/*
+			// This method is called when the Listen button is clicked. Here
+			// we simply ask the server to play the sound.
+			*/
+			function doListenWithVolume() {
+
+				// Play the sound
+
+        		$.ajax({
+		    		url: "doListenWithVolume?volume=" + $("#volumeInput").val()
+		    	}).done(function (data) { });
+			}
+
+        	// At this point the page is running
+
+        	$(document).ready(function () {
+
+            	// Do we need to hide the refresh button?
+
+            	var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+            	if (true === isSafari)
+                	$('#refreshRow').hide();
+
+            	updateNameVersion();
+            	updateForm();
+            	updateSSIDs();
+        	});
+
+    	</script>
+	</head>
+    	<body>
+        	<div class='norm'>
+
+            	<h1>
+                	<span id="programName">[programName]</span>&nbsp;<span id="programVersion">[programVersion]</span>
+            	</h1>
+
+            	<button id="homeButton" onclick="window.location.href='index.html';">Home</button>
+            	<button id="friendsButton" onclick="window.location.href='friends.html';">Friends</button>
+            	<button id="settingsButton" onclick="window.location.href='settings.html';">Settings</button>
+            	<button id="backupRestoreButton" onclick="window.location.href='backupRestore.html';">Backup/Restore</button>
+            	<button id="helpButton" onclick="window.location.href='help.html';">Help</button>
+            	<button id="aboutButton" onclick="window.location.href='about.html';">About</button>
+            	<br />
+            	<br />
+
+            	<!-- Settings Div -->
+
+            	<div id="settingsDiv">
+
+                	<hr />
+
+                	<h1>Settings</h1>
+
+                	<form action="/doSettingsUpdate" method="get" style="margin-bottom:20px;">
+
+                    	<fieldset>
+                        	<legend>Wi-Fi</legend>
+
+                        	<table>
+                            	<tr>
+                                	<td>Hostname:</td>
+                                	<td>
+                                    	<input type="text" name="hostnameInput" id="hostnameInput" placeholder="Hostname" minlength="1" maxlength="15" />
+                                	</td>
+                            	</tr>
+
+                            	<tr>
+                                	<td>Wi-Fi SSID:</td>
+                                	<td>
+                                    	<input type="text" name="ssidInput" id="ssidInput" placeholder="32 characters maximum" minlength="1" maxlength="32" list="availableSSIDS" required />
+                                    	<datalist id="availableSSIDS"></datalist>
+                                	</td>
+                            	</tr>
+
+                            	<tr id="refreshRow">
+                                	<td></td>
+                                	<td>
+                                    	<button type="button" id="refreshButton" onclick="updateSSIDs()">Refresh Available SSIDs</button>
+                                	</td>
+                            	</tr>
+
+                            	<tr>
+                                	<td>Wi-Fi Password:</td>
+                                	<td>
+                                    	<input type="password" name="passwordInput" id="passwordInput" placeholder="64 characters maximum" maxlength="64" />
+                                	</td>
+                            	</tr>
+
+                        	</table>
+                    	</fieldset>
+
+                    	<br />
+
+                    	<fieldset>
+                        	<legend>Reverse Beacon Network</legend>
+
+                        	<table>
+                            	<tr>
+                            	    <td>Callsign:</td>
+                            	    <td>
+                            	        <input type="text" name="callsignInput" id="callsignInput" placeholder="Callsign" minlength="1" maxlength="32" required />
+                            	    </td>
+                            	</tr>
+
+                   	     	</table>
+                  	  	</fieldset>
+
+                    	<br />
+
+                    	<fieldset>
+                        	<legend>Miscellaneous</legend>
+
+                        	<table>
+                        		<tr>
+                                	<td>Friend Cycle Count:</td>
+                                	<td>
+                                		<input type="number" name="friendCycleCountInput" id="friendCycleCountInput" min="1" max="50" step="1" />
+                                	</td>
+                        		</tr>
+                        		<tr>
+                                	<td>LED Enabled:</td>
+                                	<td>
+                                		<input type="checkbox" name="ledEnabledInput" id="ledEnabledInput" />
+                                	</td>
+                        		</tr>
+                        		<tr>
+                                	<td>Sound Enabled:</td>
+                                	<td>
+                                		<input type="checkbox" name="soundEnabledInput" id="soundEnabledInput" />
+                                	</td>
+                        		</tr>
+                            	<tr>
+                                	<td>Volume:</td>
+                                	<td>
+                                		<input type="range" name="volumeInput" id="volumeInput"  min="0" max="30" step="1" />
+                                		<button type="button" onclick="doListenWithVolume();">Listen!</button>
+                                	</td>
+                            	</tr>
+
+                        	</table>
+                    	</fieldset>
+
+                    	<br />
+
+                    	<table>
+                        	<tr>
+                            	<td>Update</td>
+                            	<td>
+                                	<button>Update</button>
+                            	</td>
+                        	</tr>
+                    	</table>
+                	</form>
+            	</div>
+        	</div>
+        <div id=footer>&copy; <span id="programCopyright"></span></div>
+    </body>
+</html>

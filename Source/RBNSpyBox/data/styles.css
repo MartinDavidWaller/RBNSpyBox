@@ -1,0 +1,59 @@
+﻿body {
+    font-family: Georgia, "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    margin: 0px;
+    padding: 0px;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    height: 18px;
+    width: 100%;
+    text-align: center;
+    color: black;
+    clear: both;
+    margin-right: 30px;
+    margin-top: 30px;
+}
+
+#volumeSlider {
+    max-width: 100px;
+}
+
+.norm {
+    width: 95%;
+    height: 50vh;
+    font-family: Georgia, "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin-top: 5px;
+    padding-left: 45px;
+    padding-top: 15px;
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: #BED6E2;
+}
+
+h1 {
+    color: black;
+    font-weight: lighter;
+    background-repeat: no-repeat;
+    margin: 10px;
+    font-size: 22px;
+}
+
+td, th {
+    color: black;
+    font-weight: lighter;
+    background-repeat: no-repeat;
+    margin: 0px;
+    font-size: 18px;
+    border-right: solid 1px white;
+    padding-right: 13px;
+    padding-left: 13px;
+}
+
+
+TH, .bold {
+    background-color: lightblue;
+    color: black;
+}

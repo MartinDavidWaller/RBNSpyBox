@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>[RBNSpyBox]</title>
+        <link rel="stylesheet" type="text/css" href="styles.css" media="all" />
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="support.js"></script>
+
+        <script type="text/javascript">
+
+            // At this point the page is running
+
+            $(document).ready(function () {
+
+				// Update the details
+
+                updateNameVersion();
+            });
+
+        </script>
+    </head>
+    <body>
+        <div class='norm'>
+
+            <h1>
+                <span id="programName">[programName]</span>&nbsp;<span id="programVersion">[programVersion]</span>
+            </h1>
+
+            <button id="homeButton" onclick="window.location.href='index.html';">Home</button>
+            <button id="friendsButton" onclick="window.location.href='friends.html';">Friends</button>
+            <button id="settingsButton" onclick="window.location.href='settings.html';">Settings</button>
+            <button id="backupRestoreButton" onclick="window.location.href='backupRestore.html';">Backup/Restore</button>
+            <button id="helpButton" onclick="window.location.href='help.html';">Help</button>
+            <button id="aboutButton" onclick="window.location.href='about.html';">About</button>
+            <br />
+            <br />
+
+            <!-- About Div -->
+
+            <div id="aboutDiv">
+
+                <hr />
+
+                <h1>Home</h1>
+
+                <p style="max-width:700px;">
+				The Home page displays the current status of the RBNSpyBox and the status of all your "Friends".
+				This page will automatically refresh to display the latest "Friend" activity.
+				</p>
+
+                <h1>Friends</h1>
+
+                <p style="max-width:700px;">
+				The Friends page is used to maintain your list of "Friends", you can add upto a maximum of 50.
+				</p>
+
+				<p style="max-width:700px;">
+				RBNSpyBox comes pre-loaded with a number of example "Friends" and you will see these listed
+				on the Friends page.
+				</p>
+
+				<p style="max-width:700px;">
+				To update a "Friend" simply change the values in the boxes and hit the associated "Update" button.
+				</p>
+
+				<p style="max-width:700px;">
+				To remove a "Friend" simply hit the "Remove" button.
+				</p>
+
+				<p style="max-width:700px;">
+				At the bottom of the page you will find an area titled "Add New Friend".
+				</p>
+
+				<p style="max-width:700px;">
+				Here you can specify a callsign, name, comment and sound to be used when that particular "Friend"
+				is spotted. Callsigns can contain wildcards. Typically, taking the UK callsign G0PJO as an
+				example you will want to spot a "Friend" while working abroad, while within one of
+				the UK regions such as Wales, and possibly when out operating portable. To do this you can
+				specify the callsign as *G*0PJO* which will catch all occurrences. All fields are limited
+				to 20 characters. The associated sound can be disabled by unchecking the check-box.
+				</p>
+
+				<h1>Settings</h1>
+
+				<p style="max-width:700px;">
+				The Settings page is used to configure the RBNSpyBox. The main settings relate to Wi-Fi connectivity
+				but also includes settings for the Reverse Beacon Network interface and some miscellaneous settings.
+				</p>
+
+				<p style="max-width:700px;">
+				To commit all changes hit the "Update" button.
+				</p>
+
+				<h1>Backup/Restore</h1>
+
+				<p style="max-width:700px;">
+				The Backup/Restore page is used to backup and restore your list of "Friends".
+				</p>
+
+				<p style="max-width:700px;">
+				The "Friends" are backup they are persisted as a simple XML file. This file should be
+				securely saved away. To restore the friends simply drag and drop the file to the box
+				comtaining the text "Here...".
+				</p>
+
+				<hr/>
+            </div>
+        </div>
+        <div id=footer>&copy; <span id="programCopyright"></span></div>
+    </body>
+</html>
