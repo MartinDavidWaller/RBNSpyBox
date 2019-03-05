@@ -2,7 +2,13 @@
 
 Reverse Beacon Network Spy Box
 
-# Installing the Software
+## Required Hardware
+
+The circuit is based around the ESP32 ESP-WROOM-32 38-pin DevKitC breakout board. This was purchased via ebay
+from the URL https://www.ebay.co.uk/itm/ESP32-Development-Board-Wireless-WiFi-Bluetooth-2-in1-Dual-Core-for-CP2102-ESP32/153034283929?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2057872.m2749.l2649
+it mst be noted that other vendors supply this device too!
+
+## Installing the Software
 
 Start by installing the Arduino IDE. This can be found at:
 
