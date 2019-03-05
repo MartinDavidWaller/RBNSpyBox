@@ -30,6 +30,38 @@ Next install the ESP32 Fileystem Uploader.
 folder called "tools" and copy the ESP32FS folder from the zip file to the "tools" folder
 - Close and re-open the Arduino IDE. On the Tools menu you should now see an entry labelled "ESP32 Sketch Data Upload"
 
+Next install the required libraries.
+
+These reside in the the folder Arduino\libraries that sits under your users "Documents" folder.
+
+Install ESPAsynchWebServer
+
+- Open the URL https://github.com/me-no-dev/ESPAsyncWebServer
+- Click on the green "Clone or download" button and select "Download ZIP"
+- Open the downloaded zip file and copy the folder "ESPAsyncWebServer-master" folder to the librraies folder mentioned above
+
+Install AsyncTCP
+
+- Open the URL https://github.com/me-no-dev/AsyncTCP
+- Click on the green "Clone or download" button and select "Download ZIP"
+- Open the downloaded zip file and copy the folder "AsyncTCP-master" folder to the librraies folder mentioned above
+
+Install Arduino-LiquidCrystal-I2C-library
+
+- Open the URL https://github.com/fdebrabander/Arduino-LiquidCrystal-I2C-library
+- Click on the green "Clone or download" button and select "Download ZIP"
+- Open the downloaded zip file and copy the folder "Arduino-LiquidCrystal-I2C-library-master" folder to the librraies folder mentioned above
+
+## Compiling the source code
+
+- Open the Arduino IDE and then open the RBNSpyBox.ino project file
+- Navigate to Tools > Boards and select "ESP32 Dev Module"
+- Navigate to Tools > Partition Scheme and select "No OTA (Large APP)"
+- Click the "Verify" button (Round circle with a tick mark in it - top left), if successful you will see something similar to 
+"Sketch uses 796430 bytes (37%) of program storage space. Maximum is 2097152 bytes.
+Global variables use 59472 bytes (18%) of dynamic memory, leaving 268208 bytes for local variables. Maximum is 327680 bytes."
+though the number may not be exact.
+
 ## SDCard
 
 The SDCard holds the ring tones that can be associated with the Friends. The files total about 13 MB and must be stored on a FAT32 formatted SDCard. 
