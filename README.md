@@ -70,7 +70,8 @@ Install Arduino-LiquidCrystal-I2C-library
 
 ## Compiling the source code
 
-- Open the Arduino IDE and then open the RBNSpyBox.ino project file
+- Download the associated ZIP file and uncompress it on your drive
+- Open the Arduino IDE and then open the RBNSpyBox.ino project file in the Source\RBNSpyBox folder
 - Navigate to Tools > Boards and select "ESP32 Dev Module"
 - Navigate to Tools > Partition Scheme and select "No OTA (Large APP)"
 - Click the "Verify" button (Round circle with a tick mark in it - top left), if successful you will see something like 
@@ -81,7 +82,8 @@ though the number may not be exact.
 ## SD Card
 
 The SD Card holds the ring tones that can be associated with the Friends. The files total about 13 MB and must be stored on a FAT32 formatted SDCard. 
-The file structure must reflect that of the SD Card folder that is the top-level folder must be "01" with the MP3 files stored below it.
+The file structure must reflect that of the SD Card folder that is the top-level folder must be "01" with the MP3 files stored below it. It should be
+possible to simply copy over the "01" folder from the downloaded SDCard folder.
 
 ## Installing the RBNSpyBox software
 
