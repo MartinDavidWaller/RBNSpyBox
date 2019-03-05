@@ -17,7 +17,7 @@
  *    software must display the following acknowledgment:
  *    "This product includes software developed by Martin D. Waller - G0PJO"
  *
- * 4. The names "ShackBox" must not be used to endorse or promote 
+ * 4. The names "RBNSpyBox" must not be used to endorse or promote 
  *    products derived from this software without
  *    prior written permission.
  *
@@ -61,6 +61,7 @@
 //  - Add CW alert.
 //  - Add email alerts.
 //  - Add confirmation at the end of a Friend restore operation.
+//  - After the reboot botton is pressed direct to the home page and not the friend page.
 
 // Related Web Links:
 //
