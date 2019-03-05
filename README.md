@@ -100,10 +100,12 @@ The compilation may take a minute or two. Again, look out for the "Connecting", 
 
 If successful, the 20 x 4 display should eventually now read:
 
+<code>
 > Connect to:
 >      RBNSpyBox
 > and browse to:
 > http://192.168.4.1
+</code>
 
 ## Configuration
 
