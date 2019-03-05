@@ -60,40 +60,19 @@ void BuildFriends() {
     { "*/MM",     "All at Sea",       "",                 SOUND_NOTE },  
     { "WB6ACU",   "Joe Walsh",        "The Eagles",       SOUND_NOTE },  
     { "W6XRL4",   "Herman Munster",   "The Munsters",     SOUND_NOTE },   
-    { "DP1POL",   "Felix Riess",      "Antarctica",       SOUND_NOTE },
-    { "*F4WBY*",  "Gil Gruson",       "",                 SOUND_NOTE },  
     { "GB*",      "Special Event",    "",                 SOUND_NOTE },   
     { "*G*2OT*",  "Old Timers",       "",                 SOUND_NOTE },  
-    { "*G*0DFC*", "Les Cropley",      "Wilby, Eye",       SOUND_MARIMBA },  
-    { "*G*0DZB*", "Peter Onion",      "",                 SOUND_NOTE },  
-    { "*G*0EKP*", "Stella Nye",       "",                 SOUND_NOTE },  
-    { "*G*0EBQ*", "Nigel Flatman",    "",                 SOUND_MARIMBA },  
-    { "*G*0GZN*", "Lindy Edmunds",    "",                 SOUND_NOTE },  
-    { "*G*0OOQ*", "Sean Whitehurst",  "Shrewsbury",       SOUND_NOTE },  
-    { "*G*0OEY*", "Andy Kerrison",    "Harwich",          SOUND_MARIMBA },  
     { "*G*0PJO*", "Martin Waller",    "Chelmondiston",    SOUND_MARIMBA },  
-    { "*G*0UPL*", "Hams Summers",     "Mr. QCX",          SOUND_MARIMBA },  
-    { "*G*1EXG*", "Dr. Jonathan Hare","",                 SOUND_NOTE },  
     { "*G*3PYE*", "Cambridge Club",   "",                 SOUND_MARIMBA },   
-    { "*G*3RTB*", "Rodger Bell",      "Woodbridge",       SOUND_MARIMBA },     
-    { "*G*3KWT*", "Ivor Shaw",        "White Rose RC",    SOUND_NOTE },     
     { "*G*3XVL*", "Chris McCarthy",   "Stowupland",       SOUND_JAMES_BOND },  
-    { "*G*3YLA*", "Jim Bacon",        "The Weather Man",  SOUND_NOTE },      
-    { "*G*4IPM*", "Nick Terry",       "Bourn",            SOUND_NOTE },   
-    { "*G*4IYC*", "Brian",            "Didcot" ,          SOUND_NOTE },  
-    { "*G*4LTZ*", "John Peake",       "",                 SOUND_NOTE },   
-    { "*G*4RHR*", "Ken Backhouse",    "",                 SOUND_MARIMBA },   
     { "*G*5LOW*", "GQRP Club",        "",                 SOUND_NOTE },  
-    { "*G*6FHB*", "Martin Williams",  "Congleton",        SOUND_JAMES_BOND }, 
     { "*G*8BBC*", "BBC",              "London",           SOUND_NOTE },  
-    { "*G*8MXV*", "Kevin Ayriss",     "Felixstowe",       SOUND_JAMES_BOND },   
-    { "*GX4ZFR*", "FDARS",            "",                 SOUND_NOTE },  
+    { "*GX4ZFR*", "FDARS",            "Felixstowe ARS",   SOUND_NOTE },  
     { "KN0WCW",   "FISTS USA",        "",                 SOUND_NOTE },
-    { "*M*5AEC*", "Barry Drinkwater", "Stowmarket",       SOUND_NOTE },
     { "ZD7*",     "St Helena",        "",                 SOUND_NOTE }
   };
   
-  for(int i = 0; i < 34; i++) {
+  for(int i = 0; i < 14; i++) {
 
     struct Friend *f = &friends[i];
 

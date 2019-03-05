@@ -10,7 +10,7 @@
 
 #define PROGRAM_NAME "RBNSpyBox"
 #define PROGRAM_VERSION_MAJOR 0
-#define PROGRAM_VERSION_MINOR 8
+#define PROGRAM_VERSION_MINOR 9
 #define BETA_TEXT ""
 #define COPYRIGHT_TEXT "(C) M.D.Waller G0PJO"
 

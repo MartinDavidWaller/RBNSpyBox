@@ -47,12 +47,20 @@
 //    Modified:   March 3rd, 2019
 //                a) V0.8 delivered to Chris G3XVL.
 //
+//    Modified:   March 5th, 2019
+//                a) Slight change to the Copyright notice as served
+//                   by the WebServer. No version change.
+//                b) Added a help page to the Web pages. No version
+//                   change.
+//                c) Reduced the demonstration friend list. Version
+//                   changed to V0.9.
 
 // ToDo
 //
 //  - Add triple characters to the spot count.
 //  - Add CW alert.
 //  - Add email alerts.
+//  - Add confirmation at the end of a Friend restore operation.
 
 // Related Web Links:
 //
