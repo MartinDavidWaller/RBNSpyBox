@@ -87,7 +87,7 @@ possible to simply copy over the "01" folder from the downloaded SDCard folder.
 
 ## Installing the RBNSpyBox software
 
-Once construction is complete as USB cable is required to join the ESP32 DevKitC board to a USB socket on your PC. 
+Once construction is complete a USB cable is required to connect the ESP32 DevKitC board to a USB socket on your PC. 
 Plug the device in.
 You may get a pop-up message identifying the new associated COM port. If not then the Windows Device Manager can be
 used to confirm the associated COM port.
