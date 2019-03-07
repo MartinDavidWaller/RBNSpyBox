@@ -62,6 +62,9 @@
 //  - Add email alerts.
 //  - Add confirmation at the end of a Friend restore operation.
 //  - After the reboot botton is pressed direct to the home page and not the friend page.
+//  - Add numbers to the friend list on the friends page.
+//  - Add ability to save default sound.
+//  - Capital 'A' in all rights reserved.
 
 // Related Web Links:
 //
