@@ -364,7 +364,7 @@ void onGetNameVersion(AsyncWebServerRequest *request){
 
   response->printf("Name=\"%s\" ",PROGRAM_NAME);
   response->printf("Version=\"V%d.%d\" ",PROGRAM_VERSION_MAJOR,PROGRAM_VERSION_MINOR); 
-  response->printf("Copyright=\"2019 M.D.Waller G0PJO, all rights reserved.\"");
+  response->printf("Copyright=\"2019 M.D.Waller G0PJO. All rights reserved.\"");
 
   response->printf("/>");
 
