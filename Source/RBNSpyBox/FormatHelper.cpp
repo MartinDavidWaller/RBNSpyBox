@@ -92,3 +92,29 @@ char *FormatUptime(time_t *bootTime) {
   
   return formatBuffer;   
 }
+
+char *FormatWithTriple(int v, char *tempBuffer)
+{
+  char t[20 + 1];
+
+  sprintf(t,"%d",v);
+
+  char *o = &tempBuffer[0];
+
+  int inputLength = strlen(t);
+  for (int i = 0; i < inputLength; i++)
+  {
+    // Add the triple if required
+
+    if (((inputLength - i) % 3 == 0) && (inputLength - i != inputLength))
+      *o++ = ',';
+
+    // Copy over the digit
+
+    *o++ = t[i];
+  }
+
+  *o = '\0';
+
+  return tempBuffer;
+}

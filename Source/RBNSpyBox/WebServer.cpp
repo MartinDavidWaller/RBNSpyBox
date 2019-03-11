@@ -392,13 +392,15 @@ void onGetRuntime(AsyncWebServerRequest *request){
 
 void onGetUpTimeAndSpotData(AsyncWebServerRequest *request){
 
+  char lineBuffer[20 + 1];
+  
   AsyncResponseStream *response = request->beginResponseStream("text/xml");
 
   response->printf("<?xml version=\"1.0\" encoding=\"utf-16\"?>");
   response->printf("<UpTimeAndSpotData ");
   
   response->printf("LastSpotSeen=\"%s\" ",FormatTimeAsDateTime(runtimeData.LastSpotSeen));
-  response->printf("SpotsSeen=\"%d\" ",runtimeData.SpotsSeen); 
+  response->printf("SpotsSeen=\"%s\" ",FormatWithTriple(runtimeData.SpotsSeen,lineBuffer)); 
   response->printf("UpTime=\"%s\"",FormatUptime(&runtimeData.BootTime));
   
   response->printf("/>");

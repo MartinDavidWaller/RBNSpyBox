@@ -67,10 +67,10 @@
 //                b) Added MaxFriends to the FriendsForEdit XML.
 //                c) Modified the Friends page to remove the Add New Friend 
 //                   ability if you already have the maximum.
+//                d) Added triple characters to the spot count.
 
 // ToDo
 //
-//  - Add triple characters to the spot count.
 //  - Add CW alert.
 //  - Add email alerts.
 //  - Add confirmation at the end of a Friend restore operation.
@@ -608,8 +608,7 @@ void displayRBNInfo() {
   // Put in the no of spots seen
   
   clearDisplayLineBuffer();
-  sprintf(line,"%d",runtimeData.SpotsSeen);
-  displayCentredTextInRow(line,1);
+  displayCentredTextInRow(FormatWithTriple(runtimeData.SpotsSeen,line),1);
 
   // Put in the last spot seen at
 
