@@ -474,15 +474,16 @@ int GetFriendsAsXML(void textHandler(char *s)) {
 }
 
 int GetFriendsForEditAsXML(void textHandler(char *s)) {
-  
-  textHandler("<?xml version=\"1.0\" encoding=\"utf-16\"?>");
-  textHandler("<FriendsForEdit xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"> ");
-  
-  const int xmlBufferSize = 1 * 1024;
-  
-  static char xmlBuffer[xmlBufferSize];
-  char t2[100];
 
+  const int xmlBufferSize = 1 * 1024;
+ 
+  static char xmlBuffer[xmlBufferSize];
+  char t2[200];
+    
+  textHandler("<?xml version=\"1.0\" encoding=\"utf-16\"?>");
+  sprintf(t2,"<FriendsForEdit xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" MaxFriends=\"%d\"> ",MAX_FRIEND_COUNT);
+  textHandler(t2);
+  
   // For all the friends we have
   
   for(int i = 0; i < MAX_FRIEND_COUNT; i++) {

@@ -108,6 +108,12 @@
 
                     $("#friendsDiv").empty();
 
+					// Pull out the maximum number of friends
+
+					var maxFriends = data.documentElement.getAttribute("MaxFriends");
+
+					// Process all the friends
+
                     var friends = data.documentElement.getElementsByTagName("FriendForEdit");
                     if (0 == friends.length) {
                         var tempDiv = document.createElement("div");
@@ -115,6 +121,17 @@
                         $("#friendsDiv").append(tempDiv);
                     }
                     else {
+
+						// Do we need to hide the "Add New Friend" division
+
+						if (friends.length >= (0 + maxFriends))
+						{
+							// Hide the ability to add new friends
+
+							$("#addNewFriendDiv").hide();
+						}
+
+						// Process all the friends
 
                         var tableBody = buildTable($("#friendsDiv"), ["No.", "Callsign", "Name", "Comment", "Sounds", "Update", "Remove"]);
                         for (var i = 0; i < friends.length; i++) {
@@ -264,62 +281,67 @@
 
                 <div id="friendsDiv"></div>
 
-                <hr />
+				<div id="addNewFriendDiv">
 
-                <form action="doAddFriend" method="get">
-                    <h1>Add New Friend</h1>
-                    <table>
-                        <tr>
-                            <td>Callsign:</td>
-                            <td>
-                                <input name='addFriendCallsign' type="text" placeholder="Callsign" maxlength="20" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Name:</td>
-                            <td>
-                                <input name='addFriendName' type="text" placeholder="Name" maxlength="20" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Comment:</td>
-                            <td>
-                                <input name='addFriendComment' type="text" placeholder="Comment" maxlength="20">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Sound:</td>
-                            <td>
-                            	<input type="checkbox" name="addFriendSoundEnabled" checked="checked">
-                                <select id="addFriendSoundSelection" name="addFriendSoundSelection">
-                                </select>
-								<button type="button" onclick="doListen();">Listen!</button>
-                            </td>
-                        </tr>
-                    </table>
-                    <p>
-                        <button type="submit">Add friend!</button>
-                    </p>
-                    <p>
-                        &nbsp;
-                    </p>
-                </form>
+                	<hr />
 
-                <hr />
+                	<form action="doAddFriend" method="get">
+                    	<h1>Add New Friend</h1>
+                    	<table>
+                        	<tr>
+                            	<td>Callsign:</td>
+                            	<td>
+                                	<input name='addFriendCallsign' type="text" placeholder="Callsign" maxlength="20" required>
+                            	</td>
+                        	</tr>
+                        	<tr>
+                            	<td>Name:</td>
+                            	<td>
+                                	<input name='addFriendName' type="text" placeholder="Name" maxlength="20" required>
+                            	</td>
+                        	</tr>
+                        	<tr>
+                            	<td>Comment:</td>
+                            	<td>
+                                	<input name='addFriendComment' type="text" placeholder="Comment" maxlength="20">
+                            	</td>
+                        	</tr>
+                        	<tr>
+                            	<td>Sound:</td>
+                            	<td>
+                            		<input type="checkbox" name="addFriendSoundEnabled" checked="checked">
+                                	<select id="addFriendSoundSelection" name="addFriendSoundSelection">
+                                	</select>
+									<button type="button" onclick="doListen();">Listen!</button>
+                            	</td>
+                        	</tr>
+                    	</table>
+                    	<p>
+                        	<button type="submit">Add friend!</button>
+                    	</p>
+                    	<p>
+                        	&nbsp;
+                    	</p>
+                	</form>
+ 				</div>
 
-                <form action="doRemoveAllFriends" method="get">
-                    <h1>Delete All Friends</h1>
 
-                    <p>
-                        <button
-                        	style="background-color: red; color: white;"
-                        	onclick="return confirm('Are you sure?')"
-                        	type="submit">Delete All!</button>
-                    </p>
-                    <p>
-                        &nbsp;
-                    </p>
-                </form>
+               	<hr />
+
+               	<form action="doRemoveAllFriends" method="get">
+                   	<h1>Delete All Friends</h1>
+
+                   	<p>
+                       	<button
+                       		style="background-color: red; color: white;"
+                       		onclick="return confirm('Are you sure?')"
+                       		type="submit">Delete All!</button>
+                   	</p>
+                   	<p>
+                       	&nbsp;
+                   	</p>
+               	</form>
+
             </div>
         </div>
         <div id=footer>Copyright &copy; <span id="programCopyright"></span></div>

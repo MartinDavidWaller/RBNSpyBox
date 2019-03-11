@@ -59,6 +59,14 @@
 //                a) Improved the copyright text.
 //                b) Added numbers to the friends page so you can see
 //                   how many you have.
+//
+//    Modified:   March 11th, 2019
+//                a) Moved the code that sets to hostname to just after the
+//                   call to WiFi.begin. This seems to work better than doing
+//                   it later.
+//                b) Added MaxFriends to the FriendsForEdit XML.
+//                c) Modified the Friends page to remove the Add New Friend 
+//                   ability if you already have the maximum.
 
 // ToDo
 //
@@ -210,6 +218,13 @@ boolean connectWiFi() {
   
   WiFi.begin((char *)&configuration.WiFi_SSID[0],(char *)&configuration.WiFi_Password[0]);
 
+  // Apply any hostname that we may have
+  
+  if (strlen((char *)&configuration.Hostname[0]) > 0)
+    WiFi.setHostname((char *)&configuration.Hostname[0]);
+  else
+    WiFi.setHostname(PROGRAM_NAME);    
+    
   // Wait for the connection to be made.
 
   int maxTry = 10;
@@ -225,13 +240,6 @@ boolean connectWiFi() {
       return false;
     }
   }
-
-  // Apply any hostname that we may have
-  
-  if (strlen((char *)&configuration.Hostname[0]) > 0)
-    WiFi.setHostname((char *)&configuration.Hostname[0]);
-  else
-    WiFi.setHostname(PROGRAM_NAME);    
 
   // We are connected, display the IP address
  
