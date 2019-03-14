@@ -76,6 +76,8 @@
 //  - Add confirmation at the end of a Friend restore operation.
 //  - After the reboot botton is pressed direct to the home page and not the friend page.
 //  - Add ability to save default sound.
+//  - Make use of schedule_function to flush changes to EEPROM etc.
+//  - Try out WiFi.setSleep(false) just after WiFi.begin().
 
 // Related Web Links:
 //
