@@ -68,6 +68,10 @@
 //                c) Modified the Friends page to remove the Add New Friend 
 //                   ability if you already have the maximum.
 //                d) Added triple characters to the spot count.
+//
+//    Modified:   March 16th, 2019
+//                a) Added a call to WiFi.setSleep(false) to see if it helps
+//                   Chris.
 
 // ToDo
 //
@@ -77,7 +81,6 @@
 //  - After the reboot botton is pressed direct to the home page and not the friend page.
 //  - Add ability to save default sound.
 //  - Make use of schedule_function to flush changes to EEPROM etc.
-//  - Try out WiFi.setSleep(false) just after WiFi.begin().
 
 // Related Web Links:
 //
@@ -219,6 +222,10 @@ boolean connectWiFi() {
   // Begin the connection
   
   WiFi.begin((char *)&configuration.WiFi_SSID[0],(char *)&configuration.WiFi_Password[0]);
+
+  // Disable sleep
+  
+  WiFi.setSleep(false);
 
   // Apply any hostname that we may have
   
