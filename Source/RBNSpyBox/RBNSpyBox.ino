@@ -81,7 +81,7 @@
 //  - After the reboot botton is pressed direct to the home page and not the friend page.
 //  - Add ability to save default sound.
 //  - Make use of schedule_function to flush changes to EEPROM etc.
-//  - Add the ability to trun the display backlight off between two given times.
+//  - Add the ability to turn the display backlight off between two given times.
 
 // Related Web Links:
 //
