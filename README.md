@@ -1,6 +1,7 @@
 # RBNSpyBox
 
-Reverse Beacon Network Spy Box
+The RBNSpyBox project is documented in Practical Wireless, July 2019. If you require further information,
+such as the associated circuit diagram or a PCB, then please contact me at martin@the-wallers.net.
 
 ## Required Hardware
 
