@@ -72,6 +72,12 @@
 //    Modified:   March 16th, 2019
 //                a) Added a call to WiFi.setSleep(false) to see if it helps
 //                   Chris.
+//
+//    Modified:   September 20th, 2019
+//  		  a) With help from Mark, G6WRB, we've added code to turn the 
+//                   backlight off between certain hours. This is fixed at compile
+//                   to and not configurable in the web interface - yet!
+//
 
 // ToDo
 //
@@ -81,7 +87,6 @@
 //  - After the reboot botton is pressed direct to the home page and not the friend page.
 //  - Add ability to save default sound.
 //  - Make use of schedule_function to flush changes to EEPROM etc.
-//  - Add the ability to turn the display backlight off between two given times.
 
 // Related Web Links:
 //
@@ -1028,6 +1033,60 @@ void loop() {
     lastSecond = now;
   }
 
+#if TURN_BACK_LIGHT_OFF == TURN_BACK_LIGHT_OFF_YES
+
+  // We also need to turn the backlight on and off as required.
+
+  // Decide which way round we are? Is the on time before the off time or
+  // the other way round?
+
+  int onMinutes = BACK_LIGHT_ON_HOUR * 60 + BACK_LIGHT_ON_MINUTE;
+  int offMinutes = BACK_LIGHT_OFF_HOUR * 60 + BACK_LIGHT_OFF_MINUTE;
+
+  // What if the time now - in minutes
+
+  struct tm *timeInfo;
+  timeInfo = localtime(&now);
+    
+  int nowMinutes = timeInfo->tm_hour * 60 + timeInfo->tm_min;
+              
+  if (onMinutes < offMinutes) {
+
+    // Typically this would be lights between 09:00 and 21:00
+                
+    if ((nowMinutes >= onMinutes) && (nowMinutes < offMinutes)) {
+
+      // We want the light on
+
+      lcd.backlight();
+    }
+    else {
+
+      // We want the light off
+
+      lcd.noBacklight();                  
+    }
+  }
+  else {
+
+    // Typically this would be lights between 21:00 and 09:00
+
+    if ((nowMinutes >= onMinutes) || (nowMinutes < offMinutes)) {
+
+      // We want the light on
+
+      lcd.backlight();
+    }
+    else {
+
+      // We want the light off
+
+      lcd.noBacklight();                  
+    }                
+  }
+  
+#endif                
+  
   // Finally we need to check to see if all is well. There are various conditions
   // upon which we will reset.
 

@@ -1,18 +1,33 @@
 /*
  *  RBNSpyBox.h
- *  
+ *
  *  (C) 2019 Martin D. Waller - Martin@The-Wallers.net
- *  
+ *
  *  This code is licenced under the GPL.
  */
- 
+
 // The following manifests provide the product information
 
 #define PROGRAM_NAME "RBNSpyBox"
 #define PROGRAM_VERSION_MAJOR 0
-#define PROGRAM_VERSION_MINOR 9
+#define PROGRAM_VERSION_MINOR 91
 #define BETA_TEXT ""
 #define COPYRIGHT_TEXT "(C) M.D.Waller G0PJO"
+
+// CHANGE THESE LINES TO TURN OFF THE DISPLAY BACK LIGHT BETWEEN TWO TIMES ----
+
+#define TURN_BACK_LIGHT_OFF_YES 1
+#define TURN_BACK_LIGHT_OFF_NO 0
+
+#define TURN_BACK_LIGHT_OFF TURN_BACK_LIGHT_OFF_NO
+
+#define BACK_LIGHT_ON_HOUR 06
+#define BACK_LIGHT_ON_MINUTE 00
+
+#define BACK_LIGHT_OFF_HOUR 21
+#define BACK_LIGHT_OFF_MINUTE 00
+
+// ----
 
 #define REVERSE_BEACON_NETWORK_ADDRESS "telnet.reversebeacon.net"
 #define REVERSE_BEACON_NETWORK_PORT 7000
@@ -40,7 +55,7 @@
 // The following manifests define the hardware pins used by the
 // DFPlayer module.
 
-//define DFPlayerRXPin 14 
+//define DFPlayerRXPin 14
 //define DFPlayerTXPin 12
 
 struct RuntimeData
