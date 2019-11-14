@@ -3,7 +3,7 @@
 The RBNSpyBox project is documented in Practical Wireless, July 2019. If you require further information,
 such as the associated circuit diagram or a PCB, then please contact me at martin@the-wallers.net.
 
-#Erratum
+# Erratum
 
 There is a small issue where it is possible to get trailing spaces on the end of callsigns. This
 causes an issue as it is matched against. To remove the space simply go to the Friends page, put the
