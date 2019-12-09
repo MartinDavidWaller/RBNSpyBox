@@ -9,6 +9,14 @@ There is a small issue where it is possible to get trailing spaces on the end of
 causes an issue as it is matched against. To remove the space simply go to the Friends page, put the
 curse in the callsign box, remove the space and hit update. 
 
+The Arduino IDE has moved on since this project was started. The latest IDE 1.8.10 causes a few 
+compilation errors regarding duplicate libraries. Today (December 9th, 2019) I have confirmed that
+the prject builds with Arduino IDE V1.8.6 that can be found here: 
+
+https://www.arduino.cc/en/Main/OldSoftwareReleases#previous
+
+Snapshots of the two libraries, AyncyTCP and ESPAsyncWebServer have been added to the libraries folder.
+
 ## Required Hardware
 
 The circuit is based around the ESP32 ESP-WROOM-32 38-pin DevKitC breakout board. This was purchased via ebay
