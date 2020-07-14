@@ -139,3 +139,9 @@ Once complete click "Update".
 The RBNSpyBox should now connect to the configured Wi-Fi network and start processing data.
 
 Click on the "Help" button at the top of the page for more help.
+
+## User Builds
+
+Steve, M0ECS, has sent in a picture of his completed build.
+
+<img src="https://github.com/MartinDavidWaller/RBNSpyBox/blob/master/UserBuildPictures/Steve-M0ECS.jpg?sanitize=true&raw=true" />
